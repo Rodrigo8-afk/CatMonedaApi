@@ -1,0 +1,27 @@
+
+
+
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+  
+      <h1>{{ title }}</h1>
+      
+    </div>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div class="right-side">
+     <div>
+      <h4>Acciones</h4>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary" (click)="Listar()">Mostrar datos </button>
+        <button type="button" class="btn btn-outline-primary" (click)="NuevoRegistro()">Nuevo registro</button>
+        
+      </div>
+     </div>
+
+    </div>
+  </div>
+</main>
+
+<router-outlet />

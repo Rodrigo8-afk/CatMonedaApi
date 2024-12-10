@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4></h4>
+            </div>
+            <div class="card-body">
+                <form action="">
+                    <div>
+                        <label for="numCia">NUM CIA</label>
+                        <input type="number" class="form-control" name="numCia" min="1" [(ngModel)]="catMoneda.numCia" readonly>
+                    </div>
+                    <div>
+                        <label for="claveMoneda">CLAVE MONEDA</label>
+                        <input type="text" class="form-control" name="claveMoneda" maxlength="3" [(ngModel)]="catMoneda.claveMoneda">
+                    </div>
+                    <div>
+                        <label for="descripcion">DESCRIPCION</label>
+                        <input type="text" class="form-control" name="descripcion" [(ngModel)]="catMoneda.descripcion">
+                    </div>
+                    <div>
+                        <label for="simbolo">SIMBOLO</label>
+                        <input type="text" class="form-control" name="simbolo" maxlength="1" [(ngModel)]="catMoneda.simbolo">
+                    </div>
+
+                    <div>
+                        <label for="abreviacion">ABREVIACION</label>
+                        <input type="text" class="form-control" name="abreviacion" maxlength="2" [(ngModel)]="catMoneda.abreviacion">
+                    </div>
+                   
+                    <div>
+                        <label for="monedaCorriente">MONEDA CORRIENTE</label>
+                        <input type="text" class="form-control" name="monedaCorriente" maxlength="1"  [(ngModel)]="catMoneda.monedaCorriente">
+                    </div>
+
+                    <div>
+                        <label for="estatus">ESTATUS</label>
+                        <input type="text" class="form-control" name="estatus"  maxlength="1" [(ngModel)]="catMoneda.status">
+                    </div>
+
+                    <button  class="btn btn-success" (click)="editar()"> EDITAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
