@@ -20,8 +20,8 @@ public class CatMonedaServiceImp implements ICatMonedaService{
 	}
 
 	@Override
-	public CatMoneda findById(int idCatMoneda) {
-		return catMonedaRepository.findById(idCatMoneda).orElse(null);
+	public CatMoneda findById(int numCia) {
+		return catMonedaRepository.findById(numCia).orElse(null);
 	}
 
 	@Override
@@ -30,8 +30,13 @@ public class CatMonedaServiceImp implements ICatMonedaService{
 	}
 
 	@Override
-	public void delete(int idCatMoneda) {
-		catMonedaRepository.deleteById(idCatMoneda);
+	public void delete(int numCia) {
+		catMonedaRepository.deleteById(numCia);
 	}
-
+	
+	@Override
+	public List<Integer> buscarPorEstatus(){
+		return catMonedaRepository.findByEstatus();
+	}
+	
 }

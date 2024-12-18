@@ -3,6 +3,7 @@ package com.mx.catModenaApi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,9 +36,9 @@ public class CatMonedaController {
 		return ResponseEntity.status(HttpStatus.OK).body(listado);
 	}
 	
-	@GetMapping("/{idCatMoneda}")
-	public ResponseEntity<?> buscarPorId(@PathVariable int idCatMoneda){
-		CatMoneda catMoneda = catMonedaService.findById(idCatMoneda);
+	@GetMapping("/{numCia}")
+	public ResponseEntity<?> buscarPorNumCia(@PathVariable int numCia){
+		CatMoneda catMoneda = catMonedaService.findById(numCia);
 		
 		if(catMoneda == null)
 			return ResponseEntity.notFound().build();
@@ -51,9 +52,9 @@ public class CatMonedaController {
 		return ResponseEntity.status(HttpStatus.OK).body(catMonedaNueva);
 	}
 	
-	@PutMapping("/{idCatMoneda}")
-	public ResponseEntity<?> editar(@PathVariable int idCatMoneda, @RequestBody CatMoneda catMoneda){
-		CatMoneda catMonedaEditar = catMonedaService.findById(idCatMoneda);
+	@PutMapping("/{numCia}")
+	public ResponseEntity<?> editar(@PathVariable int numCia, @RequestBody CatMoneda catMoneda){
+		CatMoneda catMonedaEditar = catMonedaService.findById(numCia);
 		
 		if(catMonedaEditar != null) {
 			catMonedaEditar.setClaveMoneda(catMoneda.getClaveMoneda());
@@ -70,18 +71,26 @@ public class CatMonedaController {
 		}
 	}
 	
-	@DeleteMapping("/{idCatMoneda}")
-	public ResponseEntity<?> eliminar(@PathVariable int idCatMoneda){
-		CatMoneda catMonedaEliminar = catMonedaService.findById(idCatMoneda);
+	@DeleteMapping("/{numCia}")
+	public ResponseEntity<?> eliminar(@PathVariable int numCia){
+		CatMoneda catMonedaEliminar = catMonedaService.findById(numCia);
 		
 		if(catMonedaEliminar == null) {
 			return ResponseEntity.notFound().build();
 		}else {
-			catMonedaService.delete(idCatMoneda);
+			catMonedaService.delete(numCia);
 			return ResponseEntity.status(HttpStatus.OK).body(catMonedaEliminar);
 		}
 			
 		
 	}
+	
+	@GetMapping("/buscarEstatus")
+	public ResponseEntity<?> buscarPorEstatus(){
+		List<Integer> listado = catMonedaService.buscarPorEstatus();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(listado);
+	}
+	
 	
 }

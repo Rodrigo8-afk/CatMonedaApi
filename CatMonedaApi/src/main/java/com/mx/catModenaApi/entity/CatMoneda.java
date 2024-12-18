@@ -1,9 +1,13 @@
 package com.mx.catModenaApi.entity;
 
+
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.Table;
 
 
@@ -11,13 +15,18 @@ import jakarta.persistence.Table;
 @Table(name = "HU_CAT_MONEDA")
 public class CatMoneda {
 	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+	@Column(name = "NUM_CIA")
 	private int numCia;
+	@Column(name= "CLAVE_MONEDA")
 	private String claveMoneda;
 	private String descripcion;
 	private String simbolo;
 	private String abreviacion;
+	@Column(name="MONEDA_CORRIENTE")
 	private String monedaCorriente;
 	private String estatus;
 	
@@ -107,6 +116,6 @@ public class CatMoneda {
 		this.estatus = status;
 	}
 	
-	
+
 	
 }

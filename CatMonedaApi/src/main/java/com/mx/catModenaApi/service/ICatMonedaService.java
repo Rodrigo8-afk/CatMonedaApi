@@ -8,10 +8,12 @@ public interface ICatMonedaService {
 	
 	public List<CatMoneda> findAll();
 	
-	public CatMoneda findById(int idCatMoneda);
+	public CatMoneda findById(int numCia);
 	
 	public CatMoneda save(CatMoneda catMoneda);
 	
-	public void delete(int idCatMoneda);
+	public void delete(int numCia);
+	
+	public List<Integer> buscarPorEstatus();
 	
 }
