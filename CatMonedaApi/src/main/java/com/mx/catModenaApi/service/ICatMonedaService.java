@@ -14,6 +14,6 @@ public interface ICatMonedaService {
 	
 	public void delete(int numCia);
 	
-	public List<Integer> buscarPorEstatus();
+	public List<CatMoneda> buscarPorEstatus(String estatus);
 	
 }

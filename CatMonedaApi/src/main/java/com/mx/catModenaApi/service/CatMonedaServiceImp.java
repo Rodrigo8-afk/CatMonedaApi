@@ -35,8 +35,12 @@ public class CatMonedaServiceImp implements ICatMonedaService{
 	}
 	
 	@Override
-	public List<Integer> buscarPorEstatus(){
-		return catMonedaRepository.findByEstatus();
+	public List<CatMoneda> buscarPorEstatus(String estatus){
+		return catMonedaRepository.findByEstatus(estatus);
+	}
+	
+	public int obtenerMaxNumCia() {
+		return catMonedaRepository.obtenerMax();
 	}
 	
 }

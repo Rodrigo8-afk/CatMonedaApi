@@ -36,14 +36,14 @@ public class CatMoneda {
 
 
 	public CatMoneda(int numCia, String claveMoneda, String descripcion, String simbolo, String abreviacion,
-			String monedaCorriente, String status) {
+			String monedaCorriente, String estatus) {
 		this.numCia = numCia;
 		this.claveMoneda = claveMoneda;
 		this.descripcion = descripcion;
 		this.simbolo = simbolo;
 		this.abreviacion = abreviacion;
 		this.monedaCorriente = monedaCorriente;
-		this.estatus = status;
+		this.estatus = estatus;
 	}
 
 
@@ -107,12 +107,12 @@ public class CatMoneda {
 	}
 
 
-	public String getStatus() {
+	public String getEstatus() {
 		return estatus;
 	}
 
 
-	public void setStatus(String status) {
+	public void setEstatus(String status) {
 		this.estatus = status;
 	}
 	

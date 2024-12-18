@@ -3,7 +3,7 @@ package com.mx.catModenaApi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mx.catModenaApi.entity.CatMoneda;
-import com.mx.catModenaApi.service.ICatMonedaService;
+import com.mx.catModenaApi.service.CatMonedaServiceImp;
+
 
 @RestController
 @RequestMapping(path = "/v1/api/catMoneda")
@@ -25,7 +26,7 @@ import com.mx.catModenaApi.service.ICatMonedaService;
 public class CatMonedaController {
 	
 	@Autowired
-	private ICatMonedaService catMonedaService;
+	private CatMonedaServiceImp catMonedaService;
 	
 	@GetMapping
 	public ResponseEntity<?> listar(){
@@ -39,7 +40,6 @@ public class CatMonedaController {
 	@GetMapping("/{numCia}")
 	public ResponseEntity<?> buscarPorNumCia(@PathVariable int numCia){
 		CatMoneda catMoneda = catMonedaService.findById(numCia);
-		
 		if(catMoneda == null)
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(catMoneda);
@@ -47,10 +47,22 @@ public class CatMonedaController {
 	
 	@PostMapping
 	public ResponseEntity<?> guardar(@RequestBody CatMoneda catMoneda){
-		CatMoneda catMonedaNueva = catMonedaService.save(catMoneda);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(catMonedaNueva);
+		if(catMoneda.getNumCia() >= catMonedaService.obtenerMaxNumCia()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}else {
+			CatMoneda catMonedaexiste = catMonedaService.findById(catMoneda.getNumCia());
+			
+			if(catMonedaexiste != null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			}else {
+				CatMoneda catMonedaNueva = catMonedaService.save(catMoneda);
+				return ResponseEntity.status(HttpStatus.OK).body(catMonedaNueva);
+			}
+		}
+		
 	}
+	
 	
 	@PutMapping("/{numCia}")
 	public ResponseEntity<?> editar(@PathVariable int numCia, @RequestBody CatMoneda catMoneda){
@@ -62,7 +74,7 @@ public class CatMonedaController {
 			catMonedaEditar.setSimbolo(catMoneda.getSimbolo());
 			catMonedaEditar.setAbreviacion(catMoneda.getAbreviacion());
 			catMonedaEditar.setMonedaCorriente(catMoneda.getMonedaCorriente());
-			catMonedaEditar.setStatus(catMoneda.getStatus());
+			catMonedaEditar.setEstatus(catMoneda.getEstatus());
 			
 			catMonedaService.save(catMonedaEditar);
 			return ResponseEntity.status(HttpStatus.OK).body(catMonedaEditar);
@@ -86,8 +98,8 @@ public class CatMonedaController {
 	}
 	
 	@GetMapping("/buscarEstatus")
-	public ResponseEntity<?> buscarPorEstatus(){
-		List<Integer> listado = catMonedaService.buscarPorEstatus();
+	public ResponseEntity<?> buscarPorEstatus(@Param("estatus") String estatus){
+		List<CatMoneda> listado = catMonedaService.buscarPorEstatus(estatus);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listado);
 	}
